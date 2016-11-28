@@ -39,30 +39,39 @@ battle.on('turn', function (data) {
     console.log('TURN', data);
 
     // TODO 1: render the characters
-    var heroes = document.querySelector('.character-listH');
-    var monsters = document.querySelector('.character-listM')
 
-    var allHeroes = battle.characters.allFrom('heroes');
-    var allMonsters = battle.characters.allFrom('monsters');
+    var listofStrings = Object.keys(this._charactersById);
+    var listofChars = document.querySelectorAll('.character-list');
+    var heroe = listofChars[0];
+    var monster = listofChars[1];
+    var personaje;
+    var viewsofChar;
 
-    heroes.innerHTML = "";
-    monsters.innerHTML = "";
+    /*for (var i = 0; i < listofStrings.length; i++){
+      personaje = this._charactersById[listofStrings[i]];
+      viewsofChar = '<li data-chara- id="'+list[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
+      if (personaje.party === 'heroes')
+          heroes.innerHTML += viewsofChar;
 
-    for (var i in allHeroes){
-     heroes.innerHTML += `<li data-chara-id="${allHeroes[i].name}"
-     > ${allHeroes[i].name} (HP: <strong>${allHeroes[i].hp}</strong>/${allHeroes[i].maxHp}
-			, MP: <strong>${allHeroes[i].mp}</strong>/${allHeroes[i].maxMp})</li>`;
-    }
+      else
+          monsters.innerHTML += viewsofChar;
 
-    for(var j in allMonsters){
-      monsters.innerHTML += `<li data-chara-id="${allMonsters[j].name}"
-      > ${allMonsters[j].name} (HP: <strong>${allMonsters[j].hp}</strong>/${allMonsters[j].maxHp}
- 			, MP: <strong>${allMonsters[j].mp}</strong>/${allMonsters[j].maxMp})</li>`;
-    }
-    // TODO 2: highlight current character
-    var activeChar = document.querySelector('[data-chara-id="' + data.activeCharacterId +'"]');
-    activeChar.classList.add("active");
+    }*/
 
+    for (var i = 0; i < listofStrings.length; i++){
+  	    personaje = this._charactersById[listofStrings[i]];
+  	    viewsofChar = '<li data-chara- id="'+listofStrings[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
+  	    if (personaje.party === 'heroes')
+  	       heroe.innerHTML += viewsofChar;
+
+  	    else
+  	        monster.innerHTML += viewsofChar;
+
+  	}
+
+    // TODO: highlight current character
+    var activeCh = document.querySelector('#' + data.activeCharacterId);
+    activeCh.classList.add('active');
 
     // TODO 3: show battle actions form
 });
