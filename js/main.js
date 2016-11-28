@@ -60,6 +60,10 @@ battle.on('turn', function (data) {
  			, MP: <strong>${allMonsters[j].mp}</strong>/${allMonsters[j].maxMp})</li>`;
     }
     // TODO 2: highlight current character
+    var activeChar = document.querySelector('[data-chara-id="' + data.activeCharacterId +'"]');
+    activeChar.classList.add("active");
+
+
     // TODO 3: show battle actions form
 });
 
