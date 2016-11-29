@@ -109,18 +109,27 @@ window.onload = function () {
         // TODO 4: hide this menu
         actionForm.style.display = 'none';
         // TODO 4: go to either select target menu, or to the select spell menu
-        if(action === 'attack')
-            targetForm.style.display = 'inline';
+        if(action ==='attack')
+            targetForm.style.display = 'block';//mostramos
         else if(action ==='defend')
-            actionForm.style.display = 'inline';
+            actionForm.style.display = 'block';//mostramos
         else if(action ==='cast')
-            spellFrom.style.dìsplay = 'inline';
+            spellFrom.style.dìsplay = 'block';
+        //----------------卐卐卐卐卐卐---------DONDE MIERDAS TENGO QUE PONER ESTO LOCO-----------卐卐卐卐卐卐-----------------
+        //INFO Object{ action :"defend", activeCharacterId:"bat", targetId: "bat", newDefense:88, success:true};
     });
 
     targetForm.addEventListener('submit', function (evt) {
         evt.preventDefault();
         // TODO 5: select the target chosen by the player
+        //Se hace de la misma manera que en el punto 4,
+        //en esta ocasion se hara con los targets
+        var target = targetForm.elements['option'].value;
+        battle.options.select(target);
         // TODO 5: hide this menu
+        //copiamos y pegamos de la guia de practica
+        actionForm.style.display = 'none';//oculta
+        targetForm.style.display = 'block';//muestra
     });
 
     targetForm.querySelector('.cancel')
