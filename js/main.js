@@ -60,7 +60,7 @@ battle.on('turn', function (data) {
   	}
 
     // TODO: highlight current character
-    var activeCh = document.querySelector('#' + data.activeCharacterId);
+    var activeCh = document.querySelector('#'+data.activeCharacterId);
     activeCh.classList.add('active');
 
     // TODO 3: show battle actions form
