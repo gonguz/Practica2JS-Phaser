@@ -46,8 +46,8 @@ battle.on('turn', function (data) {
     var monster = listofChars[1];
     var personaje;
     var viewsofChar;
-
-
+    heroe.innerHTML = '';
+    monster.innerHTML = '';
     for (var i = 0; i < listofStrings.length; i++){
   	    personaje = this._charactersById[listofStrings[i]];
   	    viewsofChar = '<li data-chara- id="'+listofStrings[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
@@ -100,7 +100,10 @@ window.onload = function () {
         evt.preventDefault();
 
         // TODO 4: select the action chosen by the player
+        var action = actionForm.elements['option'].value;
+        battle.options.select(action);
         // TODO 4: hide this menu
+        actionForm.style.display = 'none';
         // TODO 4: go to either select target menu, or to the select spell menu
     });
 
