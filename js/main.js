@@ -74,6 +74,37 @@ battle.on('turn', function (data) {
     activeCh.classList.add('active');
 
     // TODO 3: show battle actions form
+
+    /*var optionsList = battle.options.list();
+    actionForm.style.display = 'block';
+    var optionsList = actionForm.getElementsByClassName('choices');
+    lChoices[0].innerHTML = "";
+
+    for(var i = 0; i <= optionsList.length; i++){
+      lChoices[0].innerHTML += '<li><label><input type="radio" name="option" value="'+optionsList[i]+'"> '+optionsList[i]+''</label></li>''
+    }*/
+
+    var optionsList = battle.options.list();
+    var optionsArr = document.querySelectorAll(".choices");
+    var optionCh = optionsArr[0];
+    optionCh.innerHTML = "";
+    actionForm.style.display = 'block';
+
+    for(var i = 0; i < optionsList.length; i++){
+      optionCh.innerHTML += '<li><label><input type="radio" name="option" value="'+optionsList[i]+'"> '+optionsList[i]+'</label></li>';
+    }
+
+
+      /*var options = battle.options.list();
+	    actionForm.style.display = 'block';
+	    var choose = actionForm.getElementsByClassName("choices"); //busca la clase con le nombre pasado por parametro
+	    var ver;
+	    for(var i = 0; i < options.length; i++){
+	       ver = '<li><label><input type="radio" name="option" value="' + options[i] + '"> ' + options[i] + '</label></li>';
+	        choose[0].innerHTML += ver;
+	    }*/
+
+
 });
 
 battle.on('info', function (data) {
