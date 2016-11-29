@@ -91,9 +91,13 @@ battle.on('end', function (data) {
 });
 
 window.onload = function () {
+    //defensa
     actionForm = document.querySelector('form[name=select-action]');
+    //ataque
     targetForm = document.querySelector('form[name=select-target]');
+    //cast
     spellForm = document.querySelector('form[name=select-spell]');
+    
     infoPanel = document.querySelector('#battle-info');
 
     actionForm.addEventListener('submit', function (evt) {
@@ -105,6 +109,12 @@ window.onload = function () {
         // TODO 4: hide this menu
         actionForm.style.display = 'none';
         // TODO 4: go to either select target menu, or to the select spell menu
+        if(action === 'attack')
+            targetForm.style.display = 'inline';
+        else if(action ==='defend')
+            actionForm.style.display = 'inline';
+        else if(action ==='cast')
+            spellFrom.style.dìsplay = 'inline';
     });
 
     targetForm.addEventListener('submit', function (evt) {
