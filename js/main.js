@@ -47,16 +47,6 @@ battle.on('turn', function (data) {
     var personaje;
     var viewsofChar;
 
-    /*for (var i = 0; i < listofStrings.length; i++){
-      personaje = this._charactersById[listofStrings[i]];
-      viewsofChar = '<li data-chara- id="'+list[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
-      if (personaje.party === 'heroes')
-          heroes.innerHTML += viewsofChar;
-
-      else
-          monsters.innerHTML += viewsofChar;
-
-    }*/
 
     for (var i = 0; i < listofStrings.length; i++){
   	    personaje = this._charactersById[listofStrings[i]];
@@ -75,15 +65,6 @@ battle.on('turn', function (data) {
 
     // TODO 3: show battle actions form
 
-    /*var optionsList = battle.options.list();
-    actionForm.style.display = 'block';
-    var optionsList = actionForm.getElementsByClassName('choices');
-    lChoices[0].innerHTML = "";
-
-    for(var i = 0; i <= optionsList.length; i++){
-      lChoices[0].innerHTML += '<li><label><input type="radio" name="option" value="'+optionsList[i]+'"> '+optionsList[i]+''</label></li>''
-    }*/
-
     var optionsList = battle.options.list();
     var optionsArr = document.querySelectorAll(".choices");
     var optionCh = optionsArr[0];
@@ -93,17 +74,6 @@ battle.on('turn', function (data) {
     for(var i = 0; i < optionsList.length; i++){
       optionCh.innerHTML += '<li><label><input type="radio" name="option" value="'+optionsList[i]+'"> '+optionsList[i]+'</label></li>';
     }
-
-
-      /*var options = battle.options.list();
-	    actionForm.style.display = 'block';
-	    var choose = actionForm.getElementsByClassName("choices"); //busca la clase con le nombre pasado por parametro
-	    var ver;
-	    for(var i = 0; i < options.length; i++){
-	       ver = '<li><label><input type="radio" name="option" value="' + options[i] + '"> ' + options[i] + '</label></li>';
-	        choose[0].innerHTML += ver;
-	    }*/
-
 
 });
 
