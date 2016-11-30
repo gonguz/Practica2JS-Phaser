@@ -91,9 +91,13 @@ battle.on('end', function (data) {
 });
 
 window.onload = function () {
+    //defensa
     actionForm = document.querySelector('form[name=select-action]');
+    //ataque
     targetForm = document.querySelector('form[name=select-target]');
+    //cast
     spellForm = document.querySelector('form[name=select-spell]');
+
     infoPanel = document.querySelector('#battle-info');
 
     actionForm.addEventListener('submit', function (evt) {
@@ -115,7 +119,6 @@ window.onload = function () {
         evt.preventDefault();
         // TODO 5: select the target chosen by the player
         // TODO 5: hide this menu
-       // TODO 5: hide this menu
     });
 
     targetForm.querySelector('.cancel')
