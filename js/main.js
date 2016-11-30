@@ -38,7 +38,7 @@ battle.on('start', function (data) {
 battle.on('turn', function (data) {
     console.log('TURN', data);
 
-    // TODO 1: render the characters
+    // TODO 1: render the characters :::::::::
 
     var listofStrings = Object.keys(this._charactersById);
     var listofChars = document.querySelectorAll('.character-list');
@@ -50,7 +50,7 @@ battle.on('turn', function (data) {
     monster.innerHTML = '';
     for (var i = 0; i < listofStrings.length; i++){
   	    personaje = this._charactersById[listofStrings[i]];
-  	    viewsofChar = '<li data-chara- id="'+listofStrings[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
+  	    viewsofChar = '<li data-chara-id="'+listofStrings[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
   	    if (personaje.party === 'heroes')
   	       heroe.innerHTML += viewsofChar;
 
@@ -59,11 +59,11 @@ battle.on('turn', function (data) {
 
   	}
 
-    // TODO: highlight current character
-    var activeCh = document.querySelector('#'+data.activeCharacterId);
-    activeCh.classList.add('active');
+    // TODO: highlight current character ::::::::
+     var colouredChar = document.querySelector('[data-chara-id="' +data.activeCharacterId+ '"]');
+     colouredChar.classList.add('active');
 
-    // TODO 3: show battle actions form
+    // TODO 3: show battle actions form :::::::::
 
     var optionsList = battle.options.list();
     var optionsArr = document.querySelectorAll(".choices");
@@ -99,18 +99,23 @@ window.onload = function () {
     actionForm.addEventListener('submit', function (evt) {
         evt.preventDefault();
 
-        // TODO 4: select the action chosen by the player
+        // TODO 4: select the action chosen by the player ::::::::
         var action = actionForm.elements['option'].value;
         battle.options.select(action);
         // TODO 4: hide this menu
         actionForm.style.display = 'none';
         // TODO 4: go to either select target menu, or to the select spell menu
+        if(action ==='attack')
+            targetForm.style.display = 'block';//mostramos
+        else if(action ==='cast')
+            spellFrom.style.dìsplay = 'block';
     });
 
     targetForm.addEventListener('submit', function (evt) {
         evt.preventDefault();
         // TODO 5: select the target chosen by the player
         // TODO 5: hide this menu
+       // TODO 5: hide this menu
     });
 
     targetForm.querySelector('.cancel')
