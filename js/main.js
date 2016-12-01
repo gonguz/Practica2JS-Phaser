@@ -35,32 +35,69 @@ battle.on('start', function (data) {
     console.log('START', data);
 });
 
+var getMonsters = function(){
+
+  var monstersArr = [];
+  var characterList = battle._charactersById;
+  var listOfChars = document.querySelectorAll('.character-list');
+  var monster = listOfChars[1];
+  var monstersHTML = '';
+
+  for(var i in characterList){
+    viewsofChar = '<li data-chara-id="' + i + '">' +
+      characterList[i].name +
+      '(HP: <strong>' + characterList[i].hp + '</strong>/' + characterList[i].maxHp +
+      ',MP: <strong>' + characterList[i].mp + '</strong>/' + characterList[i].maxMp + ')' +
+      '</li>';
+    if(characterList[i].party === 'monsters'){
+      monstersArr.push(characterList[i]);
+      monstersHTML += viewsofChar;
+    }
+  }
+  monster.innerHTML = monstersHTML;
+  return monstersArr;
+};
+
+var getHeroes = function(){
+  var heroesArr = [];
+  var characterList = battle._charactersById;
+  var listOfChars = document.querySelectorAll('.character-list');
+  var heroe = listOfChars[0];
+  var heroesHTML = '';
+
+  for(var i in characterList){
+    viewsofChar = '<li data-chara-id="' + i + '">' +
+      characterList[i].name +
+      '(HP: <strong>' + characterList[i].hp + '</strong>/' + characterList[i].maxHp +
+      ',MP: <strong>' + characterList[i].mp + '</strong>/' + characterList[i].maxMp + ')' +
+      '</li>';
+    if(characterList[i].party === 'heroes'){
+      heroesArr.push(characterList[i]);
+      heroesHTML += viewsofChar;
+    }
+  }
+  heroe.innerHTML = heroesHTML;
+
+  return heroesArr;
+};
+
+/*var getViews = function(character){
+  return '<li data-chara-id="' + chari + '">' +
+    characterList[i].name +
+    '(HP: <strong>' + characterList[i].hp + '</strong>/' + characterList[i].maxHp +
+    ',MP: <strong>' + characterList[i].mp + '</strong>/' + characterList[i].maxMp + ')' +
+    '</li>';
+}*/
+
+
 battle.on('turn', function (data) {
     console.log('TURN', data);
 
-    // TODO 1: render the characters :::::::::
-
-    var listofStrings = Object.keys(this._charactersById);
-    var listofChars = document.querySelectorAll('.character-list');
-    var heroe = listofChars[0];
-    var monster = listofChars[1];
-    var personaje;
-    var viewsofChar;
-    heroe.innerHTML = '';
-    monster.innerHTML = '';
-    for (var i = 0; i < listofStrings.length; i++){
-  	    personaje = this._charactersById[listofStrings[i]];
-  	    viewsofChar = '<li data-chara-id="'+listofStrings[i]+'">'+personaje.name+'(HP: <strong>'+personaje.hp+'</strong>/'+personaje.maxHp+', MP: <strong>'+personaje.mp+'</strong>/'+personaje.maxMp+') </li>';
-  	    if (personaje.party === 'heroes')
-  	       heroe.innerHTML += viewsofChar;
-
-  	    else
-  	        monster.innerHTML += viewsofChar;
-
-  	}
+    getHeroes();
+    getMonsters();
 
     // TODO: highlight current character ::::::::
-     var colouredChar = document.querySelector('[data-chara-id="' +data.activeCharacterId+ '"]');
+     var colouredChar = document.querySelector('[data-chara-id="' + data.activeCharacterId + '"]');
      colouredChar.classList.add('active');
 
     // TODO 3: show battle actions form :::::::::
@@ -68,13 +105,14 @@ battle.on('turn', function (data) {
     var optionsList = battle.options.list();
     var optionsArr = document.querySelectorAll(".choices");
     var optionCh = optionsArr[0];
-    optionCh.innerHTML = "";
+    var optionsHTML = '';
     actionForm.style.display = 'block';
 
-    for(var i = 0; i < optionsList.length; i++){
-      optionCh.innerHTML += '<li><label><input type="radio" name="option" value="'+optionsList[i]+'"> '+optionsList[i]+'</label></li>';
-    }
+    optionsList.forEach(function(option, index, array){
+      optionsHTML += '<li><label><input type="radio" name="option" value="' + option + '"> ' + option + '</label></li>';
+    });
 
+    optionCh.innerHTML = optionsHTML;
 });
 
 battle.on('info', function (data) {
@@ -109,10 +147,11 @@ window.onload = function () {
         // TODO 4: hide this menu
         actionForm.style.display = 'none';
         // TODO 4: go to either select target menu, or to the select spell menu
-        if(action ==='attack')
-            targetForm.style.display = 'block';//mostramos
-        else if(action ==='cast')
-            spellFrom.style.dìsplay = 'block';
+        if(action === 'attack'){
+            targetForm.style.display = 'block';
+        }else if(action === 'cast'){
+            spellForm.style.display = 'block';
+        }
     });
 
     targetForm.addEventListener('submit', function (evt) {
