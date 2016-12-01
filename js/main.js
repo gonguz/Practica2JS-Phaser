@@ -73,7 +73,7 @@ var getHeroes = function(){
       '</li>';
     if(characterList[i].party === 'heroes'){
       heroesArr.push(characterList[i]);
-      heroesHTML += viewsofChar;
+      heroesHTML += viewsofChar
     }
   }
   heroe.innerHTML = heroesHTML;
@@ -81,20 +81,31 @@ var getHeroes = function(){
   return heroesArr;
 };
 
-/*var getViews = function(character){
-  return '<li data-chara-id="' + chari + '">' +
-    characterList[i].name +
-    '(HP: <strong>' + characterList[i].hp + '</strong>/' + characterList[i].maxHp +
-    ',MP: <strong>' + characterList[i].mp + '</strong>/' + characterList[i].maxMp + ')' +
+var getCharacters = function(character){
+  if(character.party === 'heroes'){
+    getHeroes();
+  }else{
+    getMonsters();
+  }
+}
+
+var getViews = function(character){
+  return '<li data-chara-id="' + character.name + '">' +
+    character.name +
+    '(HP: <strong>' + character.hp + '</strong>/' + character.maxHp +
+    ',MP: <strong>' + character.mp + '</strong>/' + character.maxMp + ')' +
     '</li>';
-}*/
+}
 
 
 battle.on('turn', function (data) {
     console.log('TURN', data);
 
-    getHeroes();
-    getMonsters();
+    var listOfChars = this._charactersById;
+
+    for(var i in listOfChars){
+      getCharacters(listOfChars[i]);
+    }
 
     // TODO: highlight current character ::::::::
      var colouredChar = document.querySelector('[data-chara-id="' + data.activeCharacterId + '"]');
