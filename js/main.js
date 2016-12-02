@@ -168,7 +168,14 @@ window.onload = function () {
     targetForm.addEventListener('submit', function (evt) {
         evt.preventDefault();
         // TODO 5: select the target chosen by the player
+        //Se hace de la misma manera que en el punto 4,
+        //en esta ocasion se hara con los targets
+        var target = targetForm.elements['option'].value;
+        battle.options.select(target);
         // TODO 5: hide this menu
+        //copiamos y pegamos de la guia de practica
+        actionForm.style.display = 'none';//ocultas
+        targetForm.style.display = 'block';//muestra
     });
 
     targetForm.querySelector('.cancel')
